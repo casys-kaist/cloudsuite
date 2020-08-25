@@ -30,6 +30,7 @@ object MovieLensALS {
       .setAppName("MovieLensALS")
       .set("spark.executor.memory", "2g")
     val sc = new SparkContext(conf)
+    sc.setCheckpointDir("checkpoint/")
 
     // time the execution
     val t0 = System.currentTimeMillis
@@ -91,7 +92,7 @@ object MovieLensALS {
 
     val ranks = List(8, 12)
     val lambdas = List(0.1, 10.0)
-    val numIters = List(10, 20)
+    val numIters = List(20, 30)
     var bestModel: Option[MatrixFactorizationModel] = None
     var bestValidationRmse = Double.MaxValue
     var bestRank = 0

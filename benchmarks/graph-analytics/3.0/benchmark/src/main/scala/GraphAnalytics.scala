@@ -14,8 +14,8 @@ object GraphAnalytics {
         }
     }
     var app = "pagerank"
-    var niter = 10
-    var numVertices = 100000
+    var niter = 8
+    var numVertices = 1000000
     
     val conf = new SparkConf().setAppName("Graph analytics")
     val sc = new SparkContext(conf)
@@ -34,7 +34,7 @@ options.foreach {
 	var startTime = System.currentTimeMillis()
 	if (app == "pagerank") {
 	      println("Running PageRank")
-	      val totalPR = graph.staticPageRank(5).vertices.map(_._2).sum()
+	      val totalPR = graph.staticPageRank(niter).vertices.map(_._2).sum()
 	      println(s"Total PageRank = $totalPR")
 	} else if (app == "cc") {
 	      println("Running Connected Components")
